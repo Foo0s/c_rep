@@ -5,6 +5,7 @@ using namespace std;
 
 int main(){
     /*Практическая работа №2*/
+    setlocale(LC_ALL, "RU");
     int x; int y;
     cout << "Введите число x: " << endl;
     cin >> x;
