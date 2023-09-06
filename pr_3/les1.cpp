@@ -1,13 +1,18 @@
 #include <iostream>
+#include <cmath>
+
 using namespace std;
 
 
 int main() {
 	setlocale(LC_ALL, "RU");
-	/*Вывод на экран таблицы значений x (0.2; 1.2)*/
+	/*Р”РёР°РїР°Р·РѕРЅ x = (0.2; 1.2)*/
 	double a = 0.2; double b = 1.2; double x = a; double h = 0.1;
 	while (x <= b) {
-		cout << "Значение x: " << x << endl;
+		for(int n = 1; n <= 20; n++){
+			int y = (pow(x, 2 * n - 2) / (2 * n + 1));
+			cout << "Р—РЅР°С‡РµРЅРёРµ (y): " << y << " Р—РЅР°С‡РµРЅРёРµ (x): "<< x << endl;
+		};
 		x += h;
 	}
 }
