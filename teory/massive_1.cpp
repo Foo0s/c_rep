@@ -10,7 +10,11 @@ int main(){
     cout << "Заполнение массива: " << endl;
     srand(time(NULL)); //Обнуление временных меток.
     for (int i = 0; i < 50; i++){
-        massive[i] = 1+rand()%100;
+        int d = 1+rand()%100;
+        if (d % 2 != 0) massive[i] = d;
+        else{
+            i--;
+        }
     }
 
     for (int i = 0; i < 50; i++){
