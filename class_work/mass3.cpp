@@ -1,11 +1,3 @@
-/******************************************************************************
-
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
-
 #include <iostream>
 #include <iomanip>
 /*
@@ -36,7 +28,7 @@ int main()
     cout << "Вывод матрицы: \n";
         for(int i = 0; i < size_1; i++){
             for(int j = 0; j < size_2; j++){
-                cout << setw(2) << arr[i][j] << " ";
+                cout << setw(4) << arr[i][j] << " ";
             }
             cout << "\n";
     }
@@ -47,6 +39,14 @@ int main()
         for(int s = 0; s < size_2; s++){
             count += arr[k][s];
         }
-        cout << "Сумма строки (" << k << ") равна: " << count << endl;
+        cout << "Сумма строки (" << k+1 << ") равна: " << count << endl;
+    }
+    cout << "\n";
+    for(int k = 0; k < size_1; k++){
+        int count = 0;
+        for(int s = size_2-1; s >= 0; s--){
+            count += arr[s][k];
+        }
+        cout << "Сумма столбцов (" << k+1 << ") равна: " << count << endl;
     }
 }
