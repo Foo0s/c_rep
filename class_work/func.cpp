@@ -13,7 +13,7 @@ void function(int massiv[][size], const int size){
     srand(time(NULL));
     for(int i = 0; i < size; i++){
         for(int j = 0; j < size; j++){
-            massiv[i][j] = 30+rand()%30;   
+            massiv[i][j] = 30+rand()%31;   
             cout << massiv[i][j] << " ";
         }
         cout << "\n";
