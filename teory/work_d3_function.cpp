@@ -6,7 +6,7 @@ using namespace std;
 int returnSumMatrix(int *matrix, int s, int ss);
 int returnSumMatrix_st(int *matrix, int s, int ss);
 int returnSumDiag(int *matrix, int s, int ss);
-double returnArifmPd(int *matrix, int s, int ss);
+int returnArifmPd(int *matrix, int s, int ss);
 
 void massive(int *matrix, int s, int ss){
     srand(time(NULL));
@@ -87,36 +87,54 @@ int returnSumMatrix(int *matrix, int s, int ss){
     return 0;
 }
 
-int returnSumMatrix_st(int * matrix, int s, int ss){
-    int sum_matrix_st = 0; int index = 0;
-    for(int j = 1; j <= ss; j++){
-        for(int i = 0; i < ss; i++){
-            sum_matrix_st += matrix[j+index];
-            cout << matrix[index] << " ";
-            index += ss;
+int returnSumMatrix_st(int *matrix, int s, int ss){
+    int sum_matrix_st = 0; int cc = 0; int count_index = 0; int index = 0;
+    int array[s] = {};
+    for(int j = 0; j < s; j++){
+        sum_matrix_st = 0;
+        for(int i = 0; i < (s*ss); i += 1){
+            if(cc == ss){
+                array[count_index] = sum_matrix_st;
+                cc = 0;
+                count_index++;
+                index = 0;
+                cout << "\n";
+                break;
+            }
+            sum_matrix_st += matrix[index+j];
+            index += s;
+            cc++;
         }
-        cout << endl;
     }
+    
+    for(int k = 1; k < s; k++){
+        cout << "Сумма " << k << "столбца = " << array[k] << endl;
+    }
+    cout << "Сумма " << s << "столбца = " << array[0] << endl;
+    return 0;
 }
 
 int returnSumDiag(int *matrix, int s, int ss){
-    int sum_d = 1; int count = 0;
+    int sum_d = 1; int count = 0; int count_s = 0;
     for(int i = 1; i < (s*ss); i+= (s+1)){
         sum_d *= matrix[i];
         count++;
-        if (count == (s-1)){
-            sum_d *= matrix[0];
+        if (count == (s)){
+            count_s++;
             break;
         }
     }
+    if (s==ss) sum_d*=matrix[0];
     return sum_d;
 }
 
-double returnArifmPd(int *matrix, int s, int ss){
+int returnArifmPd(int *matrix, int s, int ss){
     int sum_pd = 0; int index = s;
     for(int i = 0; i < s; i++){
         sum_pd += matrix[index];
         index += s-1;
+        if(s == ss) continue;
+        else if (i == (s-1)) break;
     }
     return (double)(sum_pd / s);
 }
