@@ -2,7 +2,6 @@
 //
 
 #include <iostream>
-#include <Windows.h>
 
 using namespace std;
 
@@ -18,6 +17,8 @@ struct Student {
 };
 
 void showData(Student* std, int c_std);
+void showArifmData(Student* std, int c_std);
+void showSortData(Student* std, int c_std);
 Student* AddInfo_for_Student(Student* student, const int c_std);
 Student* setData_student(Student* student, int c_stud);
 
@@ -30,58 +31,94 @@ void menu() {
 
 void choice_menu_tab(int choice, Student* std, int count) {
     switch (choice) {
-    case 2: showData(std, count);
-    default: cout << "Ошибка";
+    case 2: showData(std, count); break;
+    case 3: showArifmData(std, count); break;
+    case 4: showSortData(std, count); break;
+    default: cout << "Ошибка"; break;
     }
 }
 int main()
 {
 
     setlocale(LC_ALL, "ru");
-    int count_student = 0;
-    cout << "Введите количество студентов: "; cin >> count_student;
-    cout << "Список функции:\n";
-    Student* new_student = 0;
-
-
-    new_student = AddInfo_for_Student(new_student, count_student);
-    setData_student(new_student, count_student);
+    const int count_student = 3;
+    Student new_students[count_student] = {};
+    setData_student(new_students, count_student);
     cout << "\n";
+    cout << "Список функции:\n";
     menu();
-    cout << "Введите ваш выбор: ";
-    int choice; cin >> choice;
-    choice_menu_tab(choice, new_student, count_student);
+    int stop = 0;
+    while (stop != 1) {
+        cout << "Введите ваш выбор: \n";
+        int choice; cin >> choice;
+        choice_menu_tab(choice, new_students, count_student);
+        cout << "Продолжить? Конец == 1: ";
+        cin >> stop;
+    }
 }
 
-
-Student* AddInfo_for_Student(Student* student, const int c_std) {
-    Student* stud = new Student[c_std];
-    return stud;
-}
 
 
 Student* setData_student(Student* student, int c_stud) {
+    int indx = 0;
     do {
-        cout << "Введите имя студента: "; cin >> student->name;
-        cout << "Введите фамилию студента: "; cin >> student->surname;
-        cout << "Введите название группы студента: "; cin >> student->group;
-        cout << "Введите возраст студента: "; cin >> student->age;
+        cout << "Введите имя студента: "; cin.getline(student[indx].name, 32);
+        cout << "Введите фамилию студента: "; cin.getline(student[indx].surname, 45);
+        cout << "Введите название группы студента: "; cin.getline(student[indx].group, 20);
+        cout << "Введите возраст студента: "; cin >> student[indx].age;
         for (int i = 0; i < 5; i++) {
             cout << "Введите оценку студента" << "\n";
-            cin >> student->numbers[i];
+            cin >> student[indx].numbers[i];
         }
-        c_stud--;
-    } while (c_stud != 0);
-    return student;
+        cin.get();
+        indx++;
+    } while (indx < c_stud);
+    return 0;
 }
 
 
 void showData(Student* std, int c_std) {
     for (int j = 0; j < c_std; j++) {
-        cout << "Имя: " << std->name << " Фамилия: " << std->surname << " Название группы: " << std->group << " Возраст студента: " << std->age << endl;
+        cout << "Имя: " << std[j].name << " Фамилия: " << std[j].surname << " Название группы: " << std[j].group << " Возраст студента: " << std[j].age << " ";
         cout << "Оценка студента: ";
-        for (int i = 5; i > 0; i--) {
-            cout << std->numbers[i] << " ";
+        for (int i = 0; i < 5; i++) {
+            cout << std[j].numbers[i] << " ";
         }
+        cout << "\n";
+    }
+}
+
+void showArifmData(Student* std, int c_std) {
+    for (int j = 0; j < c_std; j++) {
+        int count = 0;
+        for (int i = 0; i < 5; i++) {
+            count += std[j].numbers[i];
+        }
+        if (count / 5 >= 4) {
+            cout << "Имя студента = " << std[j].name << endl;
+        }
+        cout << "\n";
+    }
+}
+
+void showSortData(Student* std, int c_std) {
+    string massiv[c_std] = {};
+    
+    for (int i = 0; i < c_std; i++) {
+        string mass[c_std] = {}; int c = 0; string name;
+        for (int j = 0; j < c_std; j++) {
+            if (std[i].name > std[j].name) {
+                massiv[i] = std[j].name;
+            }
+            else {
+                c++;
+                name = std[j].name;
+            } 
+        }
+        if (c == c_std) massiv[0] = name;
+    }
+    
+    for (int i = 0; i < c_std; i++) {
+        cout << "Имя: " << massiv[i] << endl;
     }
 }
