@@ -13,7 +13,7 @@ struct Children {
 
 int main() {
 	setlocale(LC_ALL, "RU");
-	const int k_child = 3;
+	const int k_child = 20;
 	Children baby[k_child] = {};
 
 	for (int i = 0; i < k_child; i++) {
