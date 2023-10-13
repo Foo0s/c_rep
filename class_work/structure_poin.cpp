@@ -1,86 +1,95 @@
-/******************************************************************************
-
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
 
 #include <iostream>
 
-
 using namespace std;
 
-struct info{
-    int hips;
-    int breast;
-    int wisp;
-};
 
-struct Woman{
-    char name[32];
-    char surname[60];
+//Создать структуру Маршрут.
+//Которая содержит следующие поля: пункт отправления, время отправления, вид транспорта, пункт прибытия.
+//Время прибытия, цена поездки.
+//Функции: пользователь ручками вводит инфу о маршрутах, заранее незная сколько маршрутов он введёт.
+//Вывести всю введёную инфу в табличном формате на экран.
+//После вывода предложить ввести тип автомобиля, транспорта. После выдать инфу о тех маршрутах где есть данный транспорт
+
+
+struct time1 {
     int age;
-    bool engKnow;
-    info dop_info;
+    char tm[100];
 };
 
-Woman* AddStruct_wm(Woman* obj, const int amount);
-void SetData_wm(Woman* obj, const int amount);
-void showData_wm(const Woman* obj, const int amount);
+struct time2 {
+    int age;
+    char tm[100];
+};
 
 
-int main() {
-    setlocale(LC_ALL, "ru");
-    Woman* wm = 0;
-    int woman_amount = 0; int choice_user = 0;
-    do{
-        wm = AddStruct_wm(wm, woman_amount);
-        SetData_wm(wm, woman_amount);
-        woman_amount++;
-        cout << "Хотите продолжить, 1-Да, 0-Нет: "; cin >> choice_user;
-    } while(choice_user != 0);
-    showData_wm(wm, woman_amount);
-    delete[] wm; //Освобождение памяти.
-    
-    return 0;
+struct Marshrut {
+    char punkt_ot[100];
+    time1 time1_o;
+    char transport[100];
+    char punkt_pr[100];
+    time2 time2_o;
+    int price;
+};
+
+void showData(Marshrut* mashrutca, int index) {
+    for (int i = 0; i < index; i++) {
+        cout << "Пункт отправки: " << mashrutca[i].punkt_ot << " | " << "Время отправки (год): " << mashrutca[i].time1_o.age << " | " << "Время отправки: " << mashrutca[i].time1_o.tm << "Вид транспорта: " << mashrutca[i].transport << " | " << "Пункт прибытия: " << mashrutca[i].punkt_pr << " | " << "Время прибытия (год): " << mashrutca[i].time2_o.age << " | " << "Время прибытия: " << mashrutca[i].time2_o.tm;
+    }
 }
 
-Woman* AddStruct_wm(Woman* obj_w, const int amount){
-    if (amount == 0){
-        obj_w = new Woman[amount + 1];
+Marshrut* AddStruct_wm(Marshrut* obj_w, const int amount) {
+    if (amount == 0) {
+        obj_w = new Marshrut[amount + 1];
     }
-    else{
-        Woman* tempWmObj = new Woman[amount + 1];
-        for(int i = 0; i < amount; i++){
+    else {
+        Marshrut* tempWmObj = new Marshrut[amount + 1];
+        for (int i = 0; i < amount; i++) {
             tempWmObj[i] = obj_w[i];
         }
         delete[] obj_w;
-        
+
         obj_w = tempWmObj;
         return obj_w;
     }
 }
 
-void SetData_wm(Woman* obj, const int amount){
-    cout << "Имя: " << endl;
-    cin >> obj[amount].name;
-    cout << "Фамилия: " << endl;
-    cin >> obj[amount].surname;
-    cout << "Возраст: " << endl;
-    cin >> obj[amount].age;
-    cout << "Знание английского: " << endl;
-    cin >> obj[amount].engKnow;
-    cout << "Доп. инфа: " << endl;
-    cin >> obj[amount].dop_info.hips; cin >> obj[amount].dop_info.breast; cin >> obj[amount].dop_info.wisp;
+Marshrut* SetStruct(Marshrut* new_marsh, int index) {
+    cin.get();
+    cout << "Введите пункт отправки: "; cin.getline(new_marsh[index].punkt_ot, 100); cin.ignore();
+    cout << "Введите время отправки год, время через enter: "; cin >> new_marsh[index].time1_o.age; cin.getline(new_marsh[index].time1_o.tm, 100);
+    cout << "Введите тип транспорта: "; cin.getline(new_marsh[index].transport, 100);
+    cout << "Введите пункт прибытия: "; cin.getline(new_marsh[index].punkt_pr, 100);
+    cout << "Введите время прибытия год, время через enter: "; cin >> new_marsh[index].time2_o.age; cin.getline(new_marsh[index].time2_o.tm, 100);
+    cout << "Введите цену маршрута: "; cin >> new_marsh[index].price;
+    return new_marsh;
 }
 
-void showData_wm(const Woman* obj, const int amount){
-    system("cls");
+int main()
+{
+    setlocale(LC_ALL, "ru");
+    int choice = 0;
+    Marshrut* new_marsh = 0;
+    int index = 0;
+    do {
+        new_marsh = AddStruct_wm(new_marsh, index);
+        SetStruct(new_marsh, index);
+        index++;
+        cout << "Любая цифра -> Конец\n0 - Продолжить: "; cin >> choice;
+    } while (choice == 0);
+    cout << "Исходные данные: " << endl;
+    showData(new_marsh, index);
     cout << "\n";
-    cout << "№" << "Фамилия\t" << "Имя\t" << "Возраст\t" << "Знание английского\t" << "Доп. инфа\t" << endl;
-    cout << "===========================================================" << std::endl;
-    for (int i = 0; i < amount; i++) {
-        cout << "№" << i << "\nФамилия: " << obj[i].surname << "\nИмя: " << obj[i].name << "\nВозраст: " << obj[i].age << "\nЗнание английского: " << obj[i].engKnow << "\nПараметры тела: " << obj[i].dop_info.breast << " " << obj[i].dop_info.wisp << " " << obj[i].dop_info.hips << endl;
+    string choice_t;
+    cout << "Введите типа транспорта средства: "; cin >> choice_t;
+    cout << "\n";
+    for (int i = 0; i < index; i++) {
+        if (new_marsh[i].transport == choice_t) {
+            cout << "\n";
+            cout << "Пункт отправки: " << new_marsh[i].punkt_ot << " | " << ". Время отправки (год): " << new_marsh[i].time1_o.age << " | " << ". Время отправки: " << new_marsh[i].time1_o.tm << ". Вид транспорта: " << new_marsh[i].transport << " | " << ". Пункт прибытия: " << new_marsh[i].punkt_pr << " | " << ". Время прибытия (год): " << new_marsh[i].time2_o.age << " | " << ". Время прибытия: " << new_marsh[i].time2_o.tm;
+            cout << "\n";
+        }
     }
+    cout << "\n";
+    return 0;
 }
