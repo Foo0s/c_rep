@@ -3,16 +3,16 @@
 
 using namespace std;
 
-
 int main() {
-	setlocale(LC_ALL, "RU");
-	/*Диапазон x = (0.2; 1.2)*/
-	double a = 0.2; double b = 1.2; double x = a; double h = 0.1;
-	while (x <= b) {
-		for(int n = 1; n <= 20; n++){
-			int y = (pow(x, 2 * n - 2) / (2 * n + 1));
-			cout << "Значение (y): " << y << " Значение (x): "<< x << endl;
-		};
-		x += h;
+	//Вывести на экран таблицу значений функции y(x) для x, изменяющегося от а = 0.1 до b = 1.2 с шагом h = 0.1
+	setlocale(LC_ALL, "ru");
+	double a = 0.1; double b = 1.2; double h = 0.1;
+	while (a < b) {
+		double x = 0;
+		for (int i = 1; i < 20; i++) {
+			x += (double) (pow(a, (2 * i) - 1)) / (2 * i + 1);
+		}
+		a += h;
+		cout << "Значение шага: " << a << "\tЗначение x: " << x << endl;
 	}
 }
