@@ -71,12 +71,15 @@ int main()
     int choice = 0;
     Marshrut* new_marsh;
     int index = 0;
-    while (choice == 0) {
+    
+    do {
         new_marsh = AddStruct_wm(new_marsh, index);
         index++;
         SetStruct(new_marsh, index);
         cout << "Любая цифра -> Конец\n0 - Продолжить: "; cin >> choice;
-    }
+        cin.get();
+    } while (choice == 0);
+    
     cout << "Исходные данные: " << endl;
     showData(new_marsh, index);
     cout << "\n";
