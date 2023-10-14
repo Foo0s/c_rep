@@ -14,20 +14,20 @@ using namespace std;
 
 struct time1{
     int age;
-    char tm[100];
+    char tm[40];
 };
 
 struct time2{
     int age;
-    char tm[100];
+    char tm[40];
 };
 
 
 struct Marshrut{
-    char punkt_ot[100];
+    char punkt_ot[40];
     time1 time1_o;
-    char transport[100];
-    char punkt_pr[100];
+    char transport[40];
+    char punkt_pr[40];
     time2 time2_o;
     int price;
 };
@@ -50,7 +50,7 @@ Marshrut* AddStruct_wm(Marshrut* obj_w, const int amount){
         delete[] obj_w;
         
         obj_w = tempWmObj;
-       // return obj_w;
+        // return obj_w;
     }
     return obj_w;
 }
@@ -62,7 +62,6 @@ Marshrut* SetStruct(Marshrut* new_marsh, int index) {
         cout << "Введите пункт прибытия: "; cin.getline(new_marsh[index].punkt_pr, 100);
         cout << "Введите время прибытия год, время через enter: "; cin >> new_marsh[index].time2_o.age; cin.getline(new_marsh[index].time2_o.tm, 100);
         cout << "Введите цену маршрута: "; cin >> new_marsh[index].price; 
-        cin.get();
     return new_marsh;
 }
 
@@ -71,7 +70,6 @@ int main()
     int choice = 0;
     Marshrut* new_marsh;
     int index = 0;
-    
     do {
         new_marsh = AddStruct_wm(new_marsh, index);
         index++;
