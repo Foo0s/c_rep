@@ -17,7 +17,7 @@ int main() {
 	cout << "Введите отчество: ";
 	cin >> s2;
 
-	string new_s = s1 + " " + s.substr(0, 1) + "." + s2.substr(0, 1) + ".";
+	string new_s = s1 + " " + s[0] + "." + s2[0] + ".";
 
 	cout << new_s;
 }
