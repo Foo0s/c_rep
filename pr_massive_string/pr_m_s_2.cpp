@@ -8,32 +8,26 @@ int main() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	string arr_cities[10] = {"Волгоград", "Stalingrad", "Moskva", "Ростов-на-Дону", "Pavlovgrad", "Калининград", "Азов", "Тверь", "Омск", "Зеленограл"};
+	string arr_cities[6];
 
-	cout << "Изначальный массив: " << endl;
-	for (int i = 0; i < 10; i++) {
-		cout << arr_cities[i] << "\t";
+	for (int i = 0; i < 6; i++) {
+		cout << "Горная вершина: " << endl;
+		cin >> arr_cities[i];
 	}
 
 
 	//Обработка массива строк//
-	int size = 0;
-	int indx = 0;
-	int indx_2 = 0;
-	int size_min = arr_cities[0].size();
-	for (int i = 0; i < arr_cities->size(); i++) {
-		if (size <= arr_cities[i].size()) { size = arr_cities[i].size(); indx = i;}
-		if (size_min >= arr_cities[i].size()) { size_min = arr_cities[i].size(); indx_2 = i;}
-	}
-	string str_n = arr_cities[indx];
-	arr_cities[indx] = arr_cities[indx_2];
-	arr_cities[indx_2] = str_n;
+	int size = arr_cities[0].size();
+	int index = 0;
 
+	for (int j = 0; j < 6; j++) {
+		if (arr_cities[j].size() <= size) {
+			size = arr_cities[j].size();
+			index = j;
+		}
+	}
 	cout << "\n\n";
-	cout << "Изменённый массив: " << endl;
+	string st = arr_cities[index];
 
-	for (int j = 0; j < 10; j++) {
-		cout << arr_cities[j] << endl;
-	}
-
+	cout << "Самое короткое название горной вершины: " << st;
 }
