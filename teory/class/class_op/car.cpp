@@ -1,6 +1,9 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
+
+fstream fout("cars.txt", std::ios::app);
 
 class Car {
 
@@ -20,33 +23,38 @@ public:
 		cout << "Память была успешно очищена.";
 	}
 
-	void set_info() {
-		cout << "Введите информацию: ";
-		cin.getline(information, 100);
-	}
-
 	void information_about_car() {
 		cout << "\n";
 		cout << "Марка: " << marka << " ~ " << "Модель: " << model << " ~ " << "Гос-номер: " << gos_nomer << " ~ " << "Год: " << year << " ~ " << "Цена: " << price;
 		cout << "\n";
 	}
 
-	string get_info() {
-		return information;
+	void set_information() {
+		//Запись в файл данных.
+		fout << get_marka() << "  " << get_model() << "  " << get_gos_nomer() << "  " << get_year() << "  " << get_price() << "\nInformation: " << get_information();
+		fout.close();
 	}
 
-	int max_price(int arr[], int count) {
-		int price_now_car = arr[0];
-		for (int i = 0; i < count; i++) {
-			if (price_now_car <= (arr[i])) {
-				price_now_car = arr[i];
-			}
-		}
-		return price_now_car;
+	int max_price() {
+		fout << "\n\nИнформацию по самому дорогому автомобилю: \n";
+		fout.close();
+		set_information();
+
+		return 0;
 	}
 
 
 	//Инкапсуляция.
+
+	//Information//
+	void set_information(string informations) {
+		information = informations;
+	}
+
+	string get_information() {
+		return information;
+	}
+
 
 	//Marka//
 	void set_marka(string markaa) {
@@ -101,6 +109,5 @@ private:
 	string gos_nomer;
 	int year;
 	int price;
-
-	char information[100];
+	string information;
 };
