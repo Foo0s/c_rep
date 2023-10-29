@@ -1,5 +1,5 @@
 #include <iostream>
-#include "student.cpp"
+#include "car.cpp"
 #include <Windows.h>
 
 using namespace std;
@@ -11,12 +11,9 @@ int main() {
 
 	cout << "Введите количество машин: "; int max_car;
 	cin >> max_car;
-	int *cars_price = new int[10];
-
-	Car* new_car = new Car("marka", "model", "LDO92S", 2003, 29000);
 
 
-	int cc = 0;
+	int price_car = 0;
 	//Создание объекта машин.
 	while (max_car > 0) {
 		string marka; string model; string gos_nomer; int year; int price;
@@ -26,14 +23,55 @@ int main() {
 		cout << "Год: "; cin >> year;
 		cout << "Цена: "; cin >> price;
 		Car* new_car = new Car(marka, model, gos_nomer, year, price);
-		cars_price[cc] = price;
-		cc++;
+		if (new_car->max_price() >= price_car) {
+			price_car = new_car->max_price();
+		}
 		new_car->information_about_car();
+		new_car->set_information();
 		max_car--;
+		if (max_car == 0) {
+			new_car->max_price();
+		}
 	}
 
 
-	cout << "Максимальная цена автомобиля: " << new_car->max_price(cars_price, 10);
 	cout << "\n";
-	delete new_car;
+}#include <iostream>
+#include "car.cpp"
+#include <Windows.h>
+
+using namespace std;
+
+int main() {
+
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	cout << "Введите количество машин: "; int max_car;
+	cin >> max_car;
+
+
+	int price_car = 0;
+	//Создание объекта машин.
+	while (max_car > 0) {
+		string marka; string model; string gos_nomer; int year; int price;
+		cout << "Марка: "; cin >> marka;
+		cout << "Модель: "; cin >> model;
+		cout << "Гос-номер: "; cin >> gos_nomer;
+		cout << "Год: "; cin >> year;
+		cout << "Цена: "; cin >> price;
+		Car* new_car = new Car(marka, model, gos_nomer, year, price);
+		if (new_car->max_price() >= price_car) {
+			price_car = new_car->max_price();
+		}
+		new_car->information_about_car();
+		new_car->set_information();
+		max_car--;
+		if (max_car == 0) {
+			new_car->max_price();
+		}
+	}
+
+
+	cout << "\n";
 }
