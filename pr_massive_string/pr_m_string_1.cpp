@@ -8,7 +8,7 @@ int main() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	string arr_cities[10];
+	string arr_cities[10] = {"Амстердам", "Кенинсберг", "Киев", "Ставрополь", "анкара", "Вологда", "Москва", "Владимир", "Брянск", "Минск"};
 
 	for (int i = 0; i < 10; i++) {
 		cout << "Введите город: ";
