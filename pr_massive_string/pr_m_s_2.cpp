@@ -10,7 +10,7 @@ int main() {
 
 	string arr_cities[20];
 
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < 20; i++) {
 		cout << "Горная вершина: " << endl;
 		cin >> arr_cities[i];
 	}
