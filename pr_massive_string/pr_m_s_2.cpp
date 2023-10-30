@@ -8,12 +8,12 @@ int main() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	string arr_cities[6];
+	string arr_cities[6] = {"Новгород", "Ставрополь", "Киев", "Ялта", "Орёл", "Зеленоград"};
 
-	for (int i = 0; i < 6; i++) {
-		cout << "Горная вершина: " << endl;
-		cin >> arr_cities[i];
-	}
+	// for (int i = 0; i < 6; i++) {
+	// 	cout << "Горная вершина: " << endl;
+	// 	cin >> arr_cities[i];
+	// }
 
 
 	//Обработка массива строк//
