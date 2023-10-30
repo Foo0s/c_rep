@@ -37,12 +37,12 @@ string analitics_string(string text) {
         if (text[j] == '.') {
             for (int i = j; i > 0; i--) {
                 if (text[i] == ' ') {
-                    text.erase(i);
+                    text.erase(i, 1);
                 }
             }
         }
         if (text[j] == '#') {
-            text.erase(j);
+            text.erase(j, 1);
         }
     }
     return text;
