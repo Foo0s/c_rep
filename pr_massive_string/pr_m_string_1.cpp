@@ -18,7 +18,7 @@ int main() {
 	int counts = 0;
 	//Обработка массива строк//
 	for (int i = 0; i < arr_cities->size(); i++) {
-		if (arr_cities[i][0] == 'А') {
+		if (arr_cities[i][0] == 'А' || arr_cities[i][0] == 'а') {
 			cout << "Город: " << arr_cities[i] << endl;
 			counts++;
 		}
