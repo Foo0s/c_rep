@@ -35,9 +35,10 @@ int main()
 string analitics_string(string text) {
     for (int j = 0; j < text.length(); j++) {
         if (text[j] == '.') {
-            for (int i = j; i > 0; i--) {
-                if (text[i] == ' ') {
-                    text.erase(i, 1);
+            j--;
+            while (true) {
+                if (text[j] == ' ') {
+                    text[j].erase(' ', 1);
                 }
             }
         }
