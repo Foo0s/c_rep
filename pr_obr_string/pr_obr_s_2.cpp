@@ -28,7 +28,7 @@ int main()
 }
 
 string analitics_string(string text) {
-    int indx_w = 0; int count = 0;
+    int indx_w = 0;
     for (int j = text.length(); j > 0; j--) {
         int indx_j = 0;
         int s = 0;
@@ -40,16 +40,16 @@ string analitics_string(string text) {
                     indx_w = i;
                     break;
                 }
-                if (text[i] == ' ') { count++; }
+                if (text[i] == ' ') { 
+                    text.erase(i, 1);
+                    j--;
+                }
             }
         }
-        text.replace(indx_w + 1, count, "");
-        j -= count-1;
         if (text[j] == '#') {
             text.erase(j, 1);
             j--;
         }
     }
-    cout << count << endl;
     return text;
 }
