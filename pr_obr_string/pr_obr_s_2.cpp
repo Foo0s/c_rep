@@ -1,13 +1,7 @@
-/******************************************************************************
-
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
 
 #include <iostream>
 #include <string>
+#include <Windows.h>
 
 using namespace std;
 
@@ -15,16 +9,17 @@ string analitics_string(string text);
 
 int main()
 {
-    
-    
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
     /*
-        6-й вариант. 1-е задание.
-        Пользователь ввёл текст с ошибками. после слова может находиться 1 или 
+        6-й вариант. 2-е задание.
+        Пользователь ввёл текст с ошибками. после слова может находиться 1 или
         более пробелов перед точкой (или нет). Вывести исходный текст, убрав в
         нем эти пробелы перед точкой (между словом и точкой). В исходном тексте
         может быть много предложений и точек. А также удалить символы #.
     */
-    
+
     string text_user;
     cout << "Введите текст: ";
     getline(cin, text_user);
@@ -33,19 +28,28 @@ int main()
 }
 
 string analitics_string(string text) {
-    for (int j = 0; j < text.length(); j++) {
+    int indx_w = 0; int count = 0;
+    for (int j = text.length(); j > 0; j--) {
+        int indx_j = 0;
+        int s = 0;
         if (text[j] == '.') {
-            j--;
-            while (true) {
-                if (text[j] == ' ') {
-                    text[j].erase(' ', 1);
+            indx_j += j;
+            s += (j - 1);
+            for (int i = s; i > 0; i--) {
+                if (text[i] != ' ') {
+                    indx_w = i;
+                    break;
                 }
+                if (text[i] == ' ') { count++; }
             }
         }
+        text.replace(indx_w + 1, count, "");
+        j -= count-1;
         if (text[j] == '#') {
             text.erase(j, 1);
+            j--;
         }
     }
+    cout << count << endl;
     return text;
 }
-
